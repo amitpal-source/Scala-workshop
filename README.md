@@ -661,16 +661,45 @@ Java functions.
 
 ## 0. Getting Started
 
-First, perform these steps to set up your environment to work with Fn:
+First, perform these steps to set up your environment to work with Fn. In these
+steps, we're installing a compatible version of containerd, adding our user to
+the `docker` group, and installing `fn`:
 
 ![user input](images/userinput.png)
 >```
 > curl -o containerd.io-1.2.2-3.3.el7.x86_64.rpm https://download.docker.com/linux/centos/7/x86_64/edge/Packages/containerd.io-1.2.2-3.3.el7.x86_64.rpm
 > sudo yum install -y *.rpm
+> sudo groupadd docker
+> sudo usermod -aG docker $USER
 > sudo systemctl start docker
 > sudo curl -LSs https://raw.githubusercontent.com/fnproject/cli/master/install | sh
-> sudo /usr/local/bin/fn start &
 >```
+
+You have just added your user to the `docker` group. For this to take effect,
+you must now disconnect your SSH session (e.g. by typing `exit`), and then
+re-connect:
+
+![user input](images/userinput.png)
+>```
+>exit
+>ssh -i ~/Desktop/key.txt opc@<IP address>
+>```
+
+Next, install the `fn` server:
+
+>```sh
+> sudo curl -LSs https://raw.githubusercontent.com/fnproject/cli/master/install | sh
+>```
+
+Next, start the `fn` server as follows:
+
+![user input](images/userinput.png)
+>```
+> fn start &
+>```
+
+(Hit enter at this point to get a shell prompt. The server will continue running
+in the background).
 
 ## 1. Creating a basic Java Function
 
@@ -786,7 +815,7 @@ the directory containing the function as an argument:
 
 ![user input](images/userinput.png)
 >```sh
->sudo /usr/local/bin/fn --v deploy --local --app myapp
+> fn --v deploy --local --app myapp
 >```
 
 ```
@@ -1130,7 +1159,7 @@ Start by creating a function as follows:
 
 ![user input](images/userinput.png)
 >```sh
-> sudo /usr/local/bin/fn init --init-image fnproject/fn-java-native-init graalvmfn
+> fn init --init-image fnproject/fn-java-native-init graalvmfn
 >```
 
 ```
@@ -1159,7 +1188,7 @@ can add the —-verbose flag.
 
 ![user input](images/userinput.png)
 >```sh
-> sudo /usr/local/bin/fn --verbose deploy --local --app myapp graalvmfn
+> fn --verbose deploy --local --app myapp graalvmfn
 >```
 
 ```
@@ -1263,7 +1292,7 @@ Next, we deploy the app:
 
 ![user input](images/userinput.png)
 >```
->sudo /usr/local/bin/fn --verbose deploy --local --app myapp jvmfn
+>fn --verbose deploy --local --app myapp jvmfn
 >```
 
 
