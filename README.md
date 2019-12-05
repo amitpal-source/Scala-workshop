@@ -2,8 +2,8 @@ Table of Contents:
 
 * [Exercise 0: Connect to your Virtual Machine](#exercise-0-connect-to-your-virtual-machine)
 * [Exercise 1: GraalVM](#exercise-1-graalvm)
-* [Exercise 2: Fn](#exercise-2-fn)
-* [Exercise 3: Fn + GraalVM Together](#exercise-3-fn--graalvm-together)
+* [Exercise 2: Microservices](#exercise-2-microservices)
+* [Exercise 3: SpringBoot](#exercise-3-springboot)
 * [Appendix: VNC](#appendix-vnc)
 
 # Exercise 0: Connect to your Virtual Machine
@@ -17,8 +17,8 @@ with in this lab on your laptop, we've set up OCI virtual machines in the cloud
 for you to work with. The first step is connecting to your virtual machine via
 SSH.
 
-1. Ensure you are connected to the internet.
-2. ![user input](images/userinput.png) Download this [SSH key](https://raw.githubusercontent.com/ostrain/graalvm-fn/master/key.txt) to your Desktop, or copy it into a file on
+a. Ensure you are connected to the internet.
+b. ![user input](images/userinput.png) Download this [SSH key](https://raw.githubusercontent.com/ostrain/graalvm-fn/master/key.txt) to your Desktop, or copy it into a file on
    your desktop from here:
    ```
    -----BEGIN RSA PRIVATE KEY-----
@@ -49,13 +49,13 @@ SSH.
    u2cEAy1Je+k77/+5CSCO1yBSX5Eohy9PBfxI2gmtQ3G5TgJ/pp/y
    -----END RSA PRIVATE KEY-----
    ```
-3. Open a terminal and modify the permissions of the downloaded key:
+c. Open a terminal and modify the permissions of the downloaded key:
 
    ![user input](images/userinput.png)
    >```sh
    >chmod 400 ~/Desktop/key.txt
    >```
-4. Connect to your assigned VM via its IP address:
+d. Connect to your assigned VM via its IP address:
 
    ![user input](images/userinput.png)
    >```sh
@@ -444,85 +444,8 @@ your existing Java programs with a low-footprint and fast-startup. It also frees
 you from configuration issues such as finding the right jar files at runtime,
 and allows you to have smaller Docker images.
 
-### Creating your first Micronaut Graal application
 
-![micronaut](images/micronaut.png)
-
-Next we'll learn how to create a Hello World Micronaut Graal application. To get started, clone the git repository:
-
-![user input](images/userinput.png)
->```sh
-> git clone https://github.com/micronaut-guides/micronaut-creating-first-graal-app.git
->```
-
-Change directory to the `complete` subdirectory within the cloned repo:
-
->```sh
-> cd micronaut-creating-first-graal-app/complete
->```
-
-#### Creating native image inside Docker
-
-With this approach you only need to build the fatjar and then use Docker to build the native image.
-
-Build the Graal fatjar:
-
-![user input](images/userinput.png)
->```sh
-> ./gradlew assemble
->```
-
-Then build a docker image from it:
-
-![user input](images/userinput.png)
->```sh
-> ./docker-build.sh
->```
-
-The previous command will create the image micronaut-graal-app:latest. To execute it:
-
-Execute the native image:
-
-![user input](images/userinput.png)
->```sh
-> docker run -p 3000:8080 --name=micronaut micronaut-graal-app &
->```
-
-```
-10:29:46.845 [main] INFO  io.micronaut.runtime.Micronaut - Startup completed in 12ms. Server Running: http://localhost:8080
-```
-
-We can see that the application starts in only 12ms in this example (actual time
-will vary).
-
-#### Sending a request
-
-From another terminal, you can run a few cURL requests to test the application:
-
-![user input](images/userinput.png)
->```sh
-> time curl localhost:3000/conferences/random
->```
-
-```
-{"name":"Greach"}
-real    0m0.016s
-user    0m0.005s
-sys     0m0.004s
-```
-
-Finally, kill the docker container:
-
-![user input](images/userinput.png)
->```sh
-> docker kill micronaut
->```
-
-![user input](images/micronaut-startup.png)
-
-![user input](images/micronaut-memory.png)
-
-## 3. Combine JavaScript, Java, and R
+## 3. Polyglot: Combine JavaScript, Java, and R
 
 As well as Java, GraalVM includes new implementations of JavaScript, Ruby, R and
 Python. These are written using a new language implementation framework called
@@ -646,709 +569,105 @@ kind of commoditisation of languages and modules - you can use whichever
 language you think is best for your problem at hand, and whichever library you
 want, no matter which language it came from.
 
+# Exercise 2: Microservices: Creating your first Micronaut GraalVM application
 
-# Exercise 2: Fn
-Fn is an open-source Functions-as-a-Service project. [Oracle
-Functions](https://docs.cloud.oracle.com/iaas/Content/Functions/Concepts/functionsoverview.htm)
-is a managed serverless platform based on the Fn project. In this exercise,
-we'll be using the open-source Fn project to build and run functions.
+![micronaut](images/micronaut.png)
 
-This lab introduces the
-[Fn Java FDK (Function Development Kit)](https://github.com/fnproject/fdk-java)
-and takes you through the developer experience for building and unit testing
-Java functions.
-
-
-## 0. Getting Started
-
-First, perform these steps to set up your environment to work with Fn. In these
-steps, we're installing a compatible version of containerd, adding our user to
-the `docker` group, and installing `fn`:
-
-![user input](images/userinput.png)
->```
-> curl -o containerd.io-1.2.2-3.3.el7.x86_64.rpm https://download.docker.com/linux/centos/7/x86_64/edge/Packages/containerd.io-1.2.2-3.3.el7.x86_64.rpm
-> sudo yum install -y *.rpm
-> sudo groupadd docker
-> sudo usermod -aG docker $USER
-> sudo systemctl start docker
-> sudo curl -LSs https://raw.githubusercontent.com/fnproject/cli/master/install | sh
->```
-
-You have just added your user to the `docker` group. For this to take effect,
-you must now disconnect your SSH session (e.g. by typing `exit`), and then
-re-connect:
-
-![user input](images/userinput.png)
->```
->exit
->ssh -i ~/Desktop/key.txt opc@<IP address>
->```
-
-Next, install the `fn` server:
-
->```sh
-> sudo curl -LSs https://raw.githubusercontent.com/fnproject/cli/master/install | sh
->```
-
-Next, start the `fn` server as follows:
-
-![user input](images/userinput.png)
->```
-> fn start &
->```
-
-(Hit enter at this point to get a shell prompt. The server will continue running
-in the background).
-
-## 1. Creating a basic Java Function
-
-Let's start by creating a new Java function using the Java FDK. In your terminal
-type the following:
+Next we'll learn how to create a Hello World Micronaut Graal application. To get started, clone the git repository:
 
 ![user input](images/userinput.png)
 >```sh
->fn init --runtime java javafn
+> git clone https://github.com/micronaut-guides/micronaut-creating-first-graal-app.git
 >```
 
-The output will be:
+Change directory to the `complete` subdirectory within the cloned repo:
 
-```
-Creating function at: /javafn
-Function boilerplate generated.
-func.yaml created.
-```
+>```sh
+> cd micronaut-creating-first-graal-app/complete
+>```
+
+## 0. Creating native image inside Docker
+
+With this approach you only need to build the fatjar and then use Docker to build the native image.
+
+Build the Graal fatjar:
 
 ![user input](images/userinput.png)
 >```sh
->cd javafn
+> ./gradlew assemble
 >```
 
-The `fn init` command creates an simple function with a bit of boilerplate to
-get you started. The `--runtime` option is used to indicate that the function
-we're going to develop will be written in Java 11, the default version as of
-this writing. A number of other runtimes are also supported.  
-
-Use the `find` command to see the directory structure and files that the
-`init` command has created.
+Then build a docker image from it:
 
 ![user input](images/userinput.png)
 >```sh
->find .
->
+> ./docker-build.sh
+>```
 
-```
-.
-./func.yaml
-./pom.xml
-./src
-./src/test
-./src/test/java
-./src/test/java/com
-./src/test/java/com/example
-./src/test/java/com/example/fn
-./src/test/java/com/example/fn/HelloFunctionTest.java
-./src/main
-./src/main/java
-./src/main/java/com
-./src/main/java/com/example
-./src/main/java/com/example/fn
-./src/main/java/com/example/fn/HelloFunction.java
-```
+The previous command will create the image micronaut-graal-app:latest. To execute it:
 
-As it would for any runtime, the fn init command has created a `func.yaml` file
-for your function but in the case of Java it also creates a function class, a
-function test class, and a Maven `pom.xml` file.
-
-Take a look at the contents of the generated func.yaml file.
+Execute the native image:
 
 ![user input](images/userinput.png)
 >```sh
->cat func.yaml
+> docker run -p 3000:8080 --name=micronaut micronaut-graal-app &
 >```
 
-```yaml
-schema_version: 20180708
-name: javafn
-version: 0.0.1
-runtime: java
-build_image: fnproject/fn-java-fdk-build:jdk11-1.0.86
-run_image: fnproject/fn-java-fdk:jre11-1.0.86
-cmd: com.example.fn.HelloFunction::handleRequest
+```
+10:29:46.845 [main] INFO  io.micronaut.runtime.Micronaut - Startup completed in 12ms. Server Running: http://localhost:8080
 ```
 
-The generated `func.yaml` file contains metadata about your function and
-declares a number of properties including:
+We can see that the application starts in only 12ms in this example (actual time
+will vary).
 
-* schema_version--identifies the version of the schema for this function file
-* version--the version of the function
-* runtime--the language used for this function
-* build_image--the image used to build your function's image
-* run_image--the image your function runs in
-* cmd--the `cmd` property is set to the fully qualified name of the Java
-  class and method that should be invoked when your `javafn` function is
-  called
+## 1. SetupSending a request
 
-The Java function init also generates a Maven `pom.xml` file to build and test
-your function.  The pom includes the Fn Java FDK runtime and the test libraries
-your function needs.
-
-## 2. Deploy your Java Function
-
-With the `javafn` directory containing `pom.xml` and `func.yaml` you've got
-everything you need to deploy the function to your local server.
-
-First, create an app as follows:
+From another terminal, you can run a few cURL requests to test the application:
 
 ![user input](images/userinput.png)
 >```sh
-> fn create app myapp
+> time curl localhost:3000/conferences/random
 >```
 
 ```
-Successfully created app:  myapp
+{"name":"Greach"}
+real    0m0.016s
+user    0m0.005s
+sys     0m0.004s
 ```
 
-Next, deploy your function to the app. Note that fn deploy will deploy the
-function in your current directory by default, or you can specify the name of
-the directory containing the function as an argument:
+Finally, kill the docker container:
 
 ![user input](images/userinput.png)
 >```sh
-> fn --v deploy --local --app myapp
+> docker kill micronaut
 >```
 
-```
-Deploying javafn to app: labapp-NNN
-Building image phx.ocir.io/mytenancy/myuser/javafn:0.0.2
-FN_REGISTRY:  phx.ocir.io/mytenancy/myuser
-Current Context:  workshop
-Sending build context to Docker daemon  14.34kB
-Step 1/11 : FROM fnproject/fn-java-fdk-build:jdk11-1.0.86 as build-stage
- ---> 0ab30d8e3524
-Step 2/11 : WORKDIR /function
- ---> Using cache
- ---> d6c3e60e0c04
-Step 3/11 : ENV MAVEN_OPTS -Dhttp.proxyHost= -Dhttp.proxyPort= -Dhttps.proxyHost= -Dhttps.proxyPort= -Dhttp.nonProxyHosts= -Dmaven.repo.local=/usr/share/maven/ref/repository
- ---> Using cache
- ---> 9133a74699d5
-Step 4/11 : ADD pom.xml /function/pom.xml
- ---> Using cache
- ---> f41ec165b9a8
-Step 5/11 : RUN ["mvn", "package", "dependency:copy-dependencies", "-DincludeScope=runtime", "-DskipTests=true", "-Dmdep.prependGroupId=true", "-DoutputDirectory=target", "--fail-never"]
- ---> Using cache
- ---> 384bcd123a67
-Step 6/11 : ADD src /function/src
- ---> Using cache
- ---> 2f3afddbba1b
-Step 7/11 : RUN ["mvn", "package"]
- ---> Using cache
- ---> 00a1b46e3258
-Step 8/11 : FROM fnproject/fn-java-fdk:jre11-1.0.86
- ---> d7caad608803
-Step 9/11 : WORKDIR /function
- ---> Using cache
- ---> d075b963bbfd
-Step 10/11 : COPY --from=build-stage /function/target/*.jar /function/app/
- ---> Using cache
- ---> c6a836a20c57
-Step 11/11 : CMD ["com.example.fn.HelloFunction::handleRequest"]
- ---> Using cache
- ---> 10586c295622
-Successfully built 10586c295622
-Successfully tagged phx.ocir.io/mytenancy/myuser/javafn:0.0.2
+![user input](images/micronaut-startup.png)
 
-Parts:  [phx.ocir.io mytenancy myuser javafn:0.0.2]
-Pushing phx.ocir.io/mytenancy/myuser/javafn:0.0.2 to docker registry...The push refers to repository [phx.ocir.io/mytenancy/myuser/javafn]
-...
-Updating function javafn using image phx.ocir.io/mytenancy/myuser/javafn:0.0.2...
-```
+![user input](images/micronaut-memory.png)
 
-## 3. Invoke your Deployed Function
 
-Use the the `fn invoke` command to call your function from the command line.
+# Exercise 3: SpringBoot
 
-![user input](images/userinput.png)
->```sh
-> fn invoke myapp javafn
->```
+This lab will focus on SpringBoot
 
-which results in:
+First clone the sameple springboot application
+>git clone https://github.com/spring-projects-experimental/spring-graal-native.git
+>cd spring-graal-native
+>./mvnw clean package
+>cd spring-graal-native-samples/spring-petclinic-jpa/
+>./compile.sh (takes a long time and require a lot of memory, it is not yet optimized)
+>./petclinic (first run can be slow like 1s, next ones are less than 0.2s, again it is not optimized yet)
 
-```txt
-Hello, World!
-```
-
-You can also pass data to the invoke command. For example:
-
-![user input](images/userinput.png)
->```sh
-> echo -n 'Bob' | fn invoke myapp javafn
->```
-
-```txt
-Hello, Bob!
-```
-
-"Bob" was passed to the function where it is processed and returned in the
-output.
-
-## 4. Exploring the Code
-
-We've generated, compiled, deployed, and invoked the Java function so let's take
-a look at the code.
-
-Below is the generated `com.example.fn.HelloFunction` class.  As you can
-see the function is just a method on a POJO that takes a string value
-and returns another string value, but the Java FDK also supports binding
-input parameters to streams, primitive types, byte arrays and Java POJOs
-unmarshalled from JSON.  Functions can also be static or instance
-methods.
-
-```java
-package com.example.fn;
-
-public class HelloFunction {
-
-    public String handleRequest(String input) {
-        String name = (input == null || input.isEmpty()) ? "world"  : input;
-
-        return "Hello, " + name + "!";
-    }
-
-}
-```
-
-This function returns the string "Hello, world!" unless an input string
-is provided, in which case it returns "Hello, &lt;input string&gt;!".  We saw
-this previously when we piped "Bob" into the function.   Notice that
-the Java FDK reads from standard input and automatically puts the
-content into the string passed to the function.  This greatly simplifies
-the function code.
-
-## 5. Testing with JUnit
-
-The `fn init` command also generated a JUnit test for the function which uses
-the Java FDK's function test framework.  With this framework you can setup test
-fixtures with various function input values and verify the results.
-
-The generated test confirms that when no input is provided the function returns
-"Hello, world!".
-
-```java
-package com.example.fn;
-
-import com.fnproject.fn.testing.*;
-import org.junit.*;
-
-import static org.junit.Assert.*;
-
-public class HelloFunctionTest {
-
-    @Rule
-    public final FnTestingRule testing = FnTestingRule.createDefault();
-
-    @Test
-    public void shouldReturnGreeting() {
-        testing.givenEvent().enqueue();
-        testing.thenRun(HelloFunction.class, "handleRequest");
-
-        FnResult result = testing.getOnlyResult();
-        assertEquals("Hello, world!", result.getBodyAsString());
-    }
-
-}
-```
-
-Let's add a test that confirms that when an input string like "Bob" is
-provided we get the expected result.
-
-![user input](images/userinput.png) Use `nano`, `vim`, or `emacs` to add the
-following method to the `HelloFunctionTest` class in
-`src/test/java/com/example/fn/HelloFunctionTest.java`:
-
-
-```java
-    @Test
-    public void shouldReturnWithInput() {
-        testing.givenEvent().withBody("Bob").enqueue();
-        testing.thenRun(HelloFunction.class, "handleRequest");
-
-        FnResult result = testing.getOnlyResult();
-        assertEquals("Hello, Bob!", result.getBodyAsString());
-    }
-```
-
-You can see the `withBody()` method used to specify the value of the
-function input.
-
-You can run the tests by building your function with `fn build`.  This will
-cause Maven to compile and run the updated test class.  You can also invoke your
-tests directly from Maven using `mvn test` or from your IDE.
-
-![user input](images/userinput.png)
->```sh
->fn build
->
-
-```
-Building image fndemouser/javafn:0.0.2 .......
-Function fndemouser/javafn:0.0.2 built successfully.
-```
-
-## 6. Accepting JSON Input
-
-Let's convert this function to use JSON for its input and output.
-
-![user input](images/userinput.png) Replace the definition of `HelloFunction`
-with the following:
-
-```java
-package com.example.fn;
-
-public class HelloFunction {
-
-    public static class Input {
-        public String name;
-    }
-
-    public static class Result {
-        public String salutation;
-    }
-
-    public Result handleRequest(Input input) {
-        Result result = new Result();
-        result.salutation = "Hello " + input.name;
-        return result;
-    }
-
-}
-```
-
-We've created a couple of simple Pojos to bind the JSON input and output
-to and changed the function signature to use these Pojos.  The
-Java FDK will *automatically* bind input data based on the Java arguments
-to the function. JSON support is built-in but input and output binding
-is extensible and you could plug in marshallers for other
-data formats like protobuf, avro or xml.
-
-Let's build the updated function:
-
-![user input](images/userinput.png)
->```sh
->fn build
->```
-
-Outputs:
-
-```
-Building image fndemouser/javafn:0.0.2 .....
-Error during build. Run with `--verbose` flag to see what went wrong. eg: `fn --verbose CMD`
-
-Fn: error running docker build: exit status 1
-
-See 'fn <command> --help' for more information. Client version: 0.5.16
-```
-
-Uh oh! To find out what happened rerun build with the verbose switch:
-
-![user input](images/userinput.png)
->```sh
->fn --verbose build
->```
-
-```
-...
--------------------------------------------------------
- T E S T S
--------------------------------------------------------
-Running com.example.fn.HelloFunctionTest
-An exception was thrown during Input Coercion: Failed to coerce event to user function parameter type class com.example.fn.HelloFunction$Input
-...
-An exception was thrown during Input Coercion: Failed to coerce event to user function parameter type class com.example.fn.HelloFunction$Input
-...
-Tests run: 2, Failures: 0, Errors: 2, Skipped: 0, Time elapsed: 0.893 sec <<< FAILURE!
-...
-Results :
-
-Tests in error:
-  shouldReturnGreeting(com.example.fn.HelloFunctionTest): One and only one response expected, but 0 responses were generated.
-  shouldReturnWithInput(com.example.fn.HelloFunctionTest): One and only one response expected, but 0 responses were generated.
-
-Tests run: 2, Failures: 0, Errors: 2, Skipped: 0
-
-[INFO] ------------------------------------------------------------------------
-[INFO] BUILD FAILURE
-[INFO] ------------------------------------------------------------------------
-[INFO] Total time: 3.477 s
-[INFO] Finished at: 2017-09-21T14:59:21Z
-[INFO] Final Memory: 16M/128M
-[INFO] ------------------------------------------------------------------------
-[ERROR] Failed to execute goal org.apache.maven.plugins:maven-surefire-plugin:2.12.4:test (default-test) on project hello: There are test failures.
-```
-
-*Oops!* As we can see this function build has failed due to test failures--we
-changed the code significantly but didn't update our tests!  We really
-should be doing test driven development and updating the test first, but
-at least our bad behavior has been caught.  Let's update the tests
-to reflect our new expected results.  
-
-![user input](images/userinput.png) Replace the definition of
-`HelloFunctionTest` with:
-
-```java
-
-package com.example.fn;
-
-import com.fnproject.fn.testing.*;
-import org.junit.*;
-
-import static org.junit.Assert.*;
-
-public class HelloFunctionTest {
-
-    @Rule
-    public final FnTestingRule testing = FnTestingRule.createDefault();
-
-    @Test
-    public void shouldReturnGreeting(){
-        testing.givenEvent().withBody("{\"name\":\"Bob\"}").enqueue();
-        testing.thenRun(HelloFunction.class,"handleRequest");
-
-        FnResult result = testing.getOnlyResult();
-        assertEquals("{\"salutation\":\"Hello Bob\"}", result.getBodyAsString());
-    }
-}
-
-```
-
-In the new `shouldReturnGreeting()` test method we're passing in the
-JSON document:
-
-```js
-{
-    "name": "Bob"
-}
-```
-
-and expecting a result of:
-
-```js
-{
-    "salutation": "Hello Bob"
-}
-```
-
-If you re-run the tests via `fn --verbose build` we can see that it now passes:
-
-![user input](images/userinput.png)
->```sh
-> fn --verbose build
->```
-
-Congratulations! You've just completed an introduction to serverless Java
-functions with Fn.
-
-# Exercise 3: Fn + GraalVM Together
-
-This lab will focus on a specific GraalVM capability: GraalVM Ahead-of-time
-Compilation (AOT) and more specifically on GraalVM's _native-image_ feature with
-Java functions.
-
-Start by creating a function as follows:
-
-![user input](images/userinput.png)
->```sh
-> fn init --init-image fnproject/fn-java-native-init graalvmfn
->```
-
-```
-Creating function at: ./graalvmfn
-Building from init-image: fnproject/fn-java-native-init
-func.yaml created.
-```
-
-If you compare this to the approach used for generating a “regular” Java
-function, the key difference is that we instruct the Fn CLI to use the
-`fnproject/fn-java-native-init` Docker init-image (see
-[here](https://medium.com/fnproject/even-wider-language-support-in-fn-with-init-images-a7a1b3135a6e)
-for more details on init-images) to generate a boilerplate GraalVM-based Java
-function, instead of relying on the standard Java runtime.
-
-While the standard Java FDK uses the default Java runtime, our *GraalVM
-native-image* function relies on the Docker runtime (which also explains the
-presence of a Dockerfile).
-
-You will notice that one of the steps is using *GraalVM’s native-image* utility
-to compile the Java function ahead-of-time into a native executable.
-
-Let's build the function and deploy it to the app we created earlier. We can do
-this with a single command as follows. To see in details what is going on, you
-can add the —-verbose flag.
-
-![user input](images/userinput.png)
->```sh
-> fn --verbose deploy --local --app myapp graalvmfn
->```
-
-```
-Deploying function at: ./graalvmfn
-Deploying graalvmfn to app: myapp
-Bumped to version 0.0.2
-Building image fndemouser/graalvmfn:0.0.2
-FN_REGISTRY:  fndemouser
-Current Context:  default
-
-Sending build context to Docker daemon  18.43kB
-Step 1/22 : FROM fnproject/fn-java-fdk-build:latest as build
- ---> 43818d2b84e5
-...
-```
-
-The resulting function does not run on a “regular” Java virtual machine but uses
-the necessary components like memory management, thread scheduling, etc. from a
-different virtual machine called Substrate VM (SVM). SVM, which is a part of the
-GraalVM project, is written in Java and is embedded into the generated native
-executable of the function.
-
-![native-build](images/native-build.png)
-
-That native function executable is finally added to a base lightweight image
-(busybox:glibc) with some related dependencies. This will constitute the
-function Docker image that the Fn infrastructure will use when the function is
-invoked.
-
-```
-...
-Step 16/22 : FROM busybox:glibc
- ---> 8dacfc772af7
-Step 17/22 : LABEL maintainer="tomas.zezula@oracle.com"
- ---> Using cache
- ---> c1de46df3c21
-Step 18/22 : WORKDIR /function
- ---> Using cache
- ---> 35b66da644e0
-Step 19/22 : COPY --from=build-native-image /function/func func
- ---> Using cache
- ---> b30356cb47c9
-Step 20/22 : COPY --from=build-native-image /function/runtime/lib/* .
- ---> Using cache
- ---> d458b0329776
-Step 21/22 : ENTRYPOINT ["./func", "-XX:MaximumHeapSizePercent=80"]
- ---> Using cache
- ---> 6438686b34d2
-Step 22/22 : CMD [ "com.example.fn.Myfunc::handleRequest" ]
- ---> Using cache
- ---> 94f76b3701c2
-Successfully built 94f76b3701c2
-Successfully tagged fndemouser/myfunc:0.0.2
-```
-
-You can check the size of the resulting function image using Docker.
-
->```
-> docker images | grep graalvmfn
->```
-
-```
-fndemouser/graalvmfn            0.0.2               d5742bc560f2        22 minutes ago      20.6MB
-```
-
-As you can see, the function image that includes everything required to run,
-including the operating system and the function native executable, is only
-weighing around 21 MB! Since all necessary components of a virtual machine (ex.
-GC) are embedded into the function executable, there is no need to have a
-separate Java runtime (JRE) in the function Docker image!
-
-Finally, let's invoke the deployed function and time how long it takes:
-
-![user input](images/userinput.png)
->```sh
-> time fn invoke myapp graalvmfn
->```
-
-```
-Hello, world!
-
-real	0m0.770s
-user	0m0.034s
-sys	0m0.007s
-```
-
-For comparison, let's again create a function using the standard Java runtime:
-
-![user input](images/userinput.png)
->```
-> fn init --runtime java jvmfn
->```
-
-```
-Creating function at: ./jvmfn
-Function boilerplate generated.
-func.yaml created.
-```
-
-Next, we deploy the app:
-
-![user input](images/userinput.png)
->```
->fn --verbose deploy --local --app myapp jvmfn
->```
-
-
-Again, you can check the size of the resulting function image using Docker:
-
->```
-> docker images | grep jvmfn
->```
-
-And you'll see that it's much larger:
-
-```
-fndemouser/jvmfn            0.0.2               a86a4d09bece        2 minutes ago      222MB
-```
-
-And now let's invoke it and see how long it takes:
-
-![user input](images/userinput.png)
->```
-> time fn invoke myapp jvmfn
->```
-
-```
-Hello, world!
-
-real	0m1.998s
-user	0m0.031s
-sys	0m0.016s
-```
-
-We can see that the execution time of a GraalVM native-image function is much
-faster in comparison. These numbers will vary depending on the machine you run
-the tests on but this basic benchmark shows that the cold startup of the GraalVM
-native-image function is significantly faster. In this particular example, the
-cold startup time of the GraalVM native-image function (770ms) is over twice as
-fast as the cold startup time (1998ms) of the same Java function that uses a
-regular JVM (HotSpot in this case).
+Go to http://localhost:8080/
+Click on find owners menu
+Click on find owners button to see the list of owners
+Clock on veterinarians menu
 
 ### Conclusions
 
-As you can see, using GraalVM with Fn for Serverless Java function is simple and
-straightforward. The Fn GraalVM integration relies on GraalVM’s native-image
-feature to compile ahead-of-time a Java function into a native executable that
-embeds the function itself plus the necessary components of a runtime like the
-garbage collector, resulting in a lightweight function Docker image with faster
-startup-time. Using GraalVM in Fn gives us Java functions with performanc on par
-with functions written in languages that are compiled natively such as Go! In
-Fn, GraalVM offers all the benefits of Java functions, including support of the
-Java FDK, with the performance of native code!
-
-The same function you built in this lab could also be seamlessly deployed to the
-[Oracle
-Functions](https://docs.cloud.oracle.com/iaas/Content/Functions/Concepts/functionsoverview.htm)
-cloud platform. The smaller size of the docker image built using GraalVM would
-provider further performance benefits on Oracle Functions, since the container
-must be pulled by the service when scaling up the function.
+You have seen GraalVM in action, Microservices with GraalVM and also how a SpringBoot application works with GraalVM
 
 
 ## Appendix: VNC
