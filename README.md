@@ -668,8 +668,11 @@ This lab will focus on SpringBoot
 
 ## 2. Launch Application in the browser
 Go to http://localhost:8080/
+
 Click on find owners menu
+
 Click on find owners button to see the list of owners
+
 Click on veterinarians menu
 
 ### Conclusions
