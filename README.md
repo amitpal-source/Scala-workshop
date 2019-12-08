@@ -652,18 +652,25 @@ Finally, kill the docker container:
 
 This lab will focus on SpringBoot
 
-First clone the sameple springboot application
+## 0. First clone the sample SpringBoot Application
+>```sh
 >git clone https://github.com/spring-projects-experimental/spring-graal-native.git
+>```
+
+## 1. Compile and Run the application using GraalVM Native Image
+>```sh
 >cd spring-graal-native
 >./mvnw clean package
 >cd spring-graal-native-samples/spring-petclinic-jpa/
 >./compile.sh (takes a long time and require a lot of memory, it is not yet optimized)
 >./petclinic (first run can be slow like 1s, next ones are less than 0.2s, again it is not optimized yet)
+>```
 
+## 2. Launch Application in the browser
 Go to http://localhost:8080/
 Click on find owners menu
 Click on find owners button to see the list of owners
-Clock on veterinarians menu
+Click on veterinarians menu
 
 ### Conclusions
 
