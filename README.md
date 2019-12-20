@@ -235,6 +235,83 @@ b. Unzip the archive containing the sample project
    >cd play-samples-play-scala-hello-world-tutorial
    >sbt run
    >```
+   
+c. Create a sample app
+
+   ![user input](images/userinput.png)
+   >```sh
+   >go to https://developer.lightbend.com/start/?group=play&project=play-samples-play-scala-hello-world-tutorial
+   >click generate project
+   >```   
+   
+d. In another tab in the terminal if running locally). Verify you can access the application:
+
+   ![user input](images/userinput.png)
+   >```sh
+   >wget localhost:9000
+   >```
+   
+e. Install hey, one of the load testing tools:
+
+   ![user input](images/userinput.png)
+   >```sh
+   >wget -O hey https://storage.googleapis.com/hey-release/hey_linux_amd64
+   >chmod a+x hey
+   >```  
+   
+f. Run hey on the application. Notice the results, average req/s for example.
+
+   ![user input](images/userinput.png)
+   >```sh
+   >./hey -z 300s -disable-keepalive http://127.0.0.1:9000/
+   >```   
+
+g. You will see a result similar to the below. Notice the Requests/sec value.
+
+   >```sh
+   >Summary:
+    >Total:	60.0773 secs
+    >Slowest:	0.2389 secs
+    >Fastest:	0.0088 secs
+    >Average:	0.0359 secs
+    >Requests/sec:	1170.0767
+    >Total data:	341573483 bytes
+    >Size/request:	5221 bytes
+
+   >Response time histogram:
+    >0.009 [1]	|
+    >0.032 [21608]	|■■■■■■■■■■■■■■■■■■■■■
+    >0.055 [40900]	|■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■
+    >0.078 [2020]	|■■
+    >0.101 [448]	|
+    >0.124 [225]	|
+    >0.147 [106]	|
+    >0.170 [48]	|
+    >0.193 [36]	|
+    >0.216 [26]	|
+    >0.239 [5]	|
+
+   >Latency distribution:
+    >10% in 0.0226 secs
+    >25% in 0.0295 secs
+    >50% in 0.0350 secs
+    >75% in 0.0393 secs
+    >90% in 0.0458 secs
+    >95% in 0.0531 secs
+    >99% in 0.0897 secs
+
+   >Details (average, fastest, slowest):
+    >DNS+dialup:	0.0053 secs, 0.0088 secs, 0.2389 secs
+    >DNS-lookup:	0.0000 secs, 0.0000 secs, 0.0000 secs
+    >req write:	0.0002 secs, 0.0000 secs, 0.0588 secs
+    >resp wait:	0.0299 secs, 0.0010 secs, 0.2257 secs
+    >resp read:	0.0004 secs, 0.0000 secs, 0.0628 secs
+
+   >Status code distribution:
+    >[200]	65423 responses
+   >```   
+   
+## 1.1. Setting up GraalVM and Installing Scala
 
 ### Conclusions
 
