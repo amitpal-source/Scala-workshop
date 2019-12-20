@@ -333,7 +333,7 @@ j. Run the app with OpenJDK:
 
    ![user input](images/userinput.png)
    >```sh
-   >.sbt run
+   >sbt run
    >```   
 
 k. In the terminal where you ran `hey` run the load tests and compare the results to the previous run:
@@ -343,7 +343,57 @@ k. In the terminal where you ran `hey` run the load tests and compare the result
    >./hey -z 300s -disable-keepalive http://127.0.0.1:9000/
    >```   
 
-## 1.1. Setting up GraalVM and Installing Scala
+## 1.1. Performance of scalac on Scala projects, on the example of Akka
+
+a. Clone a sample reasonably large scala project, for example: https://github.com/akka/akka.git
+
+   ![user input](images/userinput.png)
+   >```sh
+   >git clone https://github.com/akka/akka.git
+   >```
+   
+b. Navigate to akka directory.
+   
+   ![user input](images/userinput.png)
+   >```sh
+   >cd akka  
+   >```
+    
+c. Enter `sbt`, run the `clean compile` cycle twice, notice the time it takes for 1 cycle. 
+   `akka >` is the sbt REPL prefix, you don’t have to type it in.
+
+   ![user input](images/userinput.png)
+   >```sh
+   >sbt
+   >akka > clean 
+   >akka > compile
+   >akka > clean 
+   >akka > compile
+   >```   
+
+d. The very first build needs to download dependencies and will be much slower, 
+   please disregard that result, because it’s not representative of the normal 
+   development setup, where you have the dependencies downloaded and cached by sbt. 
+   The second clean compile cycle is representative of the results.
+   
+e. Compare to the results with the performance of OpenJDK. Use the terminal where you 
+   had OpenJDK installed and configured.   
+
+   ![user input](images/userinput.png)
+   >```sh
+   >sbt
+   >```   
+   
+f. Build the project repeatedly, notice times:   
+
+   ![user input](images/userinput.png)
+   >```sh
+   >>clean compile
+   >>clean compile
+   >``   
+   
+g. Build times are often cited as an important problem in the Scala community and 
+   speeding up the compilation cycle by using a better performing runtime. 
 
 ### Conclusions
 
