@@ -277,7 +277,7 @@ g. You will see a result similar to the below. Notice the Requests/sec value.
    > Requests/sec:	1170.0767
    > Total data:	341573483 bytes
    > Size/request:	5221 bytes
-
+   >```sh
    >Response time histogram:
    >0.009 [1]	|
    >0.032 [21608]	|■■■■■■■■■■■■■■■■■■■■■
@@ -290,7 +290,7 @@ g. You will see a result similar to the below. Notice the Requests/sec value.
    >0.193 [36]	|
    >0.216 [26]	|
    >0.239 [5]	|
-
+   >```sh
    >Latency distribution:
    >10% in 0.0226 secs
    >25% in 0.0295 secs
@@ -299,14 +299,14 @@ g. You will see a result similar to the below. Notice the Requests/sec value.
    >90% in 0.0458 secs
    >95% in 0.0531 secs
    >99% in 0.0897 secs
-
+   >```sh
    >Details (average, fastest, slowest):
    >DNS+dialup:	0.0053 secs, 0.0088 secs, 0.2389 secs
    >DNS-lookup:	0.0000 secs, 0.0000 secs, 0.0000 secs
    >req write:	0.0002 secs, 0.0000 secs, 0.0588 secs
    >resp wait:	0.0299 secs, 0.0010 secs, 0.2257 secs
    >resp read:	0.0004 secs, 0.0000 secs, 0.0628 secs
-
+   >```sh
    >Status code distribution:
    >[200]	65423 responses
    >```   
