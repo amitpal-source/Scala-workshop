@@ -1,11 +1,11 @@
 Table of Contents:
 
-* [Exercise 0: Getting started with GraalVM: download and installation](#exercise-0-download-and-install-graalvm)
-* [Exercise 1: Peak performance: Running Scala applications on GraalVM ](#exercise-1-running-scala-on-graalvm)
-* [Exercise 2: Low footprint & fast startup: Building native platform binaries from Scala applications with GraalVM](#exercise-2-build-native-platform-from-scala-apps)
+* [Exercise 0: Getting started with GraalVM](#exercise-0-download-and-install-graalvm)
+* [Exercise 1: Running Scala applications on GraalVM](#exercise-1-running-scala-on-graalvm)
+* [Exercise 2: Building native platform binaries from Scala applications with GraalVM](#exercise-2-build-native-platform-from-scala-apps)
 * [Appendix](#appendix)
 
-# Exercise 0: Getting started with GraalVM: download and installation
+# Exercise 0: Getting started with GraalVM
 
 > As you make your way through this lab, look out for this icon.
 ![user input](images/userinput.png) Whenever you see it, it's time for you to
@@ -65,7 +65,7 @@ d. Connect to your assigned VM via its IP address:
    You will use this later to access one of the examples using the your browser
    on your laptop.
 
-# Exercise 1: Peak performance: Running Scala applications on GraalVM
+# Exercise 1: Running Scala applications on GraalVM
 
 There are a lot of different parts to [GraalVM](https://www.graalvm.org/), so
 while you may have heard of it, there are almost certainly things that it can do
@@ -568,7 +568,7 @@ kind of commoditisation of languages and modules - you can use whichever
 language you think is best for your problem at hand, and whichever library you
 want, no matter which language it came from.
 
-# Exercise 2: Exercise 2: Low footprint & fast startup: Building native platform binaries from Scala applications with GraalVM
+# Exercise 2: Building native platform binaries from Scala applications with GraalVM
 
 ![micronaut](images/micronaut.png)
 
