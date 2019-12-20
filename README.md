@@ -83,57 +83,84 @@ a. Check the that the `java` command is now available and its version:
    >```
    
    Should Output:
-   
-   >```sh
-   java version "1.8.0_231"
-   Java(TM) SE Runtime Environment (build 1.8.0_231-b11)
-   Java HotSpot(TM) 64-Bit GraalVM EE 19.3.0 (build 25.231-b11-jvmci-19.3-b05, mixed mode)
-   >```
-   
-b. Select and download Oracle GraalVM Enterprise Edition based on JDK8 for your operating system (19.3.0). 
-   On Windows it is currently recommended for this workshop to use WLS (Linux subsystem) or Docker. 
-   Windows builds are experimental and while JVM and the JIT compiler would most probably work fine,
-   you can find difficulties with the native image commands.
-   
-c. Extract the archive to your file system. To extract the file to the current directory from the console, type
 
-   ![user input](images/userinput.png)
    >```sh
-   >tar -xvf archive.tar.gz # on Windows – double click to unzip
+   >java version "1.8.0_231"
+   >Java(TM) SE Runtime Environment (build 1.8.0_231-b11)
+   >Java HotSpot(TM) 64-Bit GraalVM EE 19.3.0 (build 25.231-b11-jvmci-19.3-b05, mixed mode)
    >```
    
-d. Navigate to Oracle Technology Network Downloads page and accept the license agreement:
+b. Change the working directory for convenience
 
    ![user input](images/userinput.png)   
-   https://www.oracle.com/technetwork/graalvm/downloads/index.html
-   
-e. Select and download Oracle GraalVM Enterprise Edition based on JDK8 for your operating system (19.3.0). 
-   On Windows it is currently recommended for this workshop to use WLS (Linux subsystem) or Docker. 
-   Windows builds are experimental and while JVM and the JIT compiler would most probably work fine,
-   you can find difficulties with the native image commands.
-   
-f. Extract the archive to your file system. To extract the file to the current directory from the console, type
-
-   ![user input](images/userinput.png)
    >```sh
-   >tar -xvf archive.tar.gz # on Windows – double click to unzip
+   >cd ..
+   >mkdir workshop
+   >cd workshop
    >```
    
-g. Navigate to Oracle Technology Network Downloads page and accept the license agreement:
-
-   ![user input](images/userinput.png)   
-   https://www.oracle.com/technetwork/graalvm/downloads/index.html
-   
-h. Select and download Oracle GraalVM Enterprise Edition based on JDK8 for your operating system (19.3.0). 
-   On Windows it is currently recommended for this workshop to use WLS (Linux subsystem) or Docker. 
-   Windows builds are experimental and while JVM and the JIT compiler would most probably work fine,
-   you can find difficulties with the native image commands.
-   
-i. Extract the archive to your file system. To extract the file to the current directory from the console, type
+c. Install SDKMan for simpler sbt/maven installation:https://sdkman.io/install
 
    ![user input](images/userinput.png)
    >```sh
-   >tar -xvf archive.tar.gz # on Windows – double click to unzip
+   >curl -s "https://get.sdkman.io" | bash
+   >source "$HOME/.sdkman/bin/sdkman-init.sh"
+   >```
+   
+d. Install sbt:
+
+   ![user input](images/userinput.png)   
+   >```sh
+   >sdk install sbt
+   >``` 
+   
+e. Check that sbt installed correctly:
+
+   ![user input](images/userinput.png)   
+   >```sh
+   >sbt -version
+   >```
+   
+   Should Output:
+
+   >```sh
+   >sbt version in this project: 1.3.3
+   >sbt script version: 1.3.3
+   >```
+   
+f. Install Scala:
+
+   ![user input](images/userinput.png)
+   >```sh
+   >sdk install scala
+   >```
+   
+g. Check that Scala installed correctly:
+
+   ![user input](images/userinput.png)    
+   >```sh
+   >scala -version
+   >```
+   
+   Should Output:
+
+   >```sh
+   >Scala code runner version 2.13.1 -- Copyright 2002-2019, LAMP/EPFL and Lightbend, Inc.
+   >```
+   
+h. Install a similar version of OpenJDK for comparisons:
+
+   ![user input](images/userinput.png)    
+   >```sh
+   >sdk install java 8.0.232.hs-adpt
+   >```
+
+i. In a different terminal to the same machine: use that Java version. For enabling that run the following commands: 
+
+   ![user input](images/userinput.png)
+   >```sh
+   >sdk use java 8.0.232-open
+   >export PATH=$JAVA_HOME/bin:$PATH
    >```   
  
 j. Navigate to Oracle Technology Network Downloads page and accept the license agreement:
