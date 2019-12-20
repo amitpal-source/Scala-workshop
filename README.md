@@ -395,6 +395,154 @@ f. Build the project repeatedly, notice times:
 g. Build times are often cited as an important problem in the Scala community and 
    speeding up the compilation cycle by using a better performing runtime. 
 
+# Exercise 2: Building Native Platform binaries from Scala Applications with GraalVM
+
+GraalVM can compile JVM bytecode to native platform binaries (or shared libraries) ahead of time. 
+The result is then an executable file (or a library) which doesn’t require the JVM to run. 
+It also doesn’t need to initialize a lot of services and JVM components at startup, because 
+it has precompiled many things already. 
+
+In this section you’ll learn how to use GraalVM native-image utility to create GraalVM native images 
+– the native binary. 
+
+The native image capability of GraalVM is available as Early Adopter technology. We have installed it 
+in the first part of this workshop.
+
+a. Let’s create a small Scala application to test the native images. Use the following command to initialize the project:
+
+   ![user input](images/userinput.png)
+   >```sh
+   >mkdir sbt-example
+   >cd sbt-example
+   >touch build.sbt
+   >mkdir -p src/main/scala/example
+   >```
+
+b. Then in the example directory create the application file `Hello.scala`:
+
+   ![user input](images/userinput.png)
+   >```sh
+   >package example
+   >object Hello extends App {
+   >println("Hello World!")
+   >}
+   >```
+   
+c. You can use GraalVM native images through various Maven/Gradle/sbt plugins, but in its purest form 
+   it’s a command line utility that takes your application class files and jar files as the input. 
+   Perhaps the simplest way is to build a “fat” jar which contains all the classes which will used in the app. 
+   Add the assembly plugin to the build:
+
+   ![user input](images/userinput.png)
+   >```sh
+   >mkdir project
+   >echo 'addSbtPlugin("com.eed3si9n" % "sbt-assembly" % "0.14.10")' > project/plugins.sbt
+   >```   
+   
+d. Run the build to get the fat jar:
+
+   ![user input](images/userinput.png)
+   >```sh
+   >sbt assembly
+   >```
+   
+e. Run the native-image utility on the application archive to build the native image:
+
+   ![user input](images/userinput.png)
+   >```sh
+   >native-image -cp target/scala-2.12/sbt-example-assembly-0.1.0-SNAPSHOT.jar -H:Class=example.Hello
+   >```  
+   
+f. Check how much time the application takes when run normally:
+
+   ![user input](images/userinput.png)
+   >```sh
+   >/usr/bin/time -v java -jar target/scala-2.12/sbt-example-assembly-0.1.0-SNAPSHOT.jar
+   >```   
+
+g. You will see a result similar to the below.
+
+   >```sh
+   >Hello World!
+	>Command being timed: "java -jar target/scala-2.12/sbt-example-assembly-0.1.0-SNAPSHOT.jar"
+	>User time (seconds): 0.54 
+	>System time (seconds): 0.05
+	>Percent of CPU this job got: 138%
+	>Elapsed (wall clock) time (h:mm:ss or m:ss): 0:00.42
+	>Average shared text size (kbytes): 0
+	>Average unshared data size (kbytes): 0
+	>Average stack size (kbytes): 0
+	>Average total size (kbytes): 0
+	>Maximum resident set size (kbytes): 64640 <- 64M
+	>Average resident set size (kbytes): 0
+	>Major (requiring I/O) page faults: 0
+	>Minor (reclaiming a frame) page faults: 8065
+	>Voluntary context switches: 1062
+	>Involuntary context switches: 10
+	>Swaps: 0
+	>File system inputs: 0
+	>File system outputs: 64
+	>Socket messages sent: 0
+	>Socket messages received: 0
+	>Signals delivered: 0
+	>Page size (bytes): 4096
+	>Exit status: 0
+   >``` 
+
+h. Compare with the time it takes to start the native image:
+
+  ![user input](images/userinput.png)
+   >```sh
+   >/usr/bin/time -v ./example.hello
+   >```
+   
+i. You will see a result similar to the below. 
+
+   >Hello World!
+	>Command being timed: "./example.hello"
+	>User time (seconds): 0.00
+	>System time (seconds): 0.00
+	>Percent of CPU this job got: 100%
+	>Elapsed (wall clock) time (h:mm:ss or m:ss): 0:00.00
+	>Average shared text size (kbytes): 0
+	>Average unshared data size (kbytes): 0
+	>Average stack size (kbytes): 0
+	>Average total size (kbytes): 0
+	>Maximum resident set size (kbytes): 4932 <- 4M
+	>Average resident set size (kbytes): 0
+	>Major (requiring I/O) page faults: 0
+	>Minor (reclaiming a frame) page faults: 169
+	>Voluntary context switches: 1
+	>Involuntary context switches: 1
+	>Swaps: 0
+	>File system inputs: 0
+	>File system outputs: 0
+	>Socket messages sent: 0
+	>Socket messages received: 0
+	>Signals delivered: 0
+	>Page size (bytes): 4096
+	>Exit status: 0
+
+j. Go back to the workshop dir:
+
+   ![user input](images/userinput.png)
+   >```sh
+   >cd..
+   >```   
+
+k. GraalVM native images have certain runtime properties – they start fast and consume less memory 
+   because they do not include the JIT compilation facilities for the bytecode. They operate under 
+   the closed world assumption – all the bytecodes that are going to be executed need to be analyzed 
+   and compiled at the generation step. This mean that certain dynamic features of the language need 
+   to be configured, for example, Java reflection API usage. Please consult documentation or your 
+   workshop leader for additional information: https://github.com/oracle/graal/tree/master/substratevm
+   
+   However that doesn’t mean that useful programs can’t be compiled ahead of time. In the following 
+   example we’ll build the native image of the `scalac` so it doesn’t spend time starting a jvm every 
+   time we call it.
+   
+## 2.1. Native image of Scalac  
+
 ### Conclusions
 
 You have seen GraalVM in action with Scala, Please provide us feedback!
