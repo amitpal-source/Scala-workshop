@@ -1,10 +1,9 @@
 Table of Contents:
 
-* [Exercise 0: Connect to your Virtual Machine](#exercise-0-connect-to-your-virtual-machine)
-* [Exercise 1: GraalVM](#exercise-1-graalvm)
-* [Exercise 2: Microservices](#exercise-2-microservices)
-* [Exercise 3: SpringBoot](#exercise-3-springboot)
-* [Appendix: VNC](#appendix-vnc)
+* [Exercise 0: Getting started with GraalVM: download and installation](#exercise-0-download-and-install-graalvm)
+* [Exercise 1: Peak performance: Running Scala applications on GraalVM ](#exercise-1-running-scala-on-graalvm)
+* [Exercise 2: Low footprint & fast startup: Building native platform binaries from Scala applications with GraalVM](#exercise-2-build-native-platform-from-scala-apps)
+* [Appendix](#appendix)
 
 # Exercise 0: Connect to your Virtual Machine
 
