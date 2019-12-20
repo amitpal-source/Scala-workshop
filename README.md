@@ -11,10 +11,13 @@ Table of Contents:
 ![user input](images/userinput.png) Whenever you see it, it's time for you to
 perform an action.
 
-To save you the trouble of having to install all of the software we're working
-with in this lab on your laptop, we've set up OCI virtual machines in the cloud
-for you to work with. The first step is connecting to your virtual machine via
-SSH.
+Hello and welcome to the GraalVM Workshop. 
+GraalVM offers a high-performance runtime for JVM languages with support for others 
+like JavaScript, Python, Ruby, R. In this workshop, you'll learn how Scala developers 
+can benefit from GraalVM. In this workshop we're going to introduce some of the GraalVM 
+abilities and how you can benefit from using GraalVM for your Scala workloads. 
+
+This workshop assumes you have access to a Linux environment
 
 a. Ensure you are connected to the internet.
 b. ![user input](images/userinput.png) Download this [SSH key](https://raw.githubusercontent.com/ostrain/graalvm-fn/master/key.txt) to your Desktop, or copy it into a file on
