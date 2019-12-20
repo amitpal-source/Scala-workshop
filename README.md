@@ -277,6 +277,7 @@ g. You will see a result similar to the below. Notice the Requests/sec value.
    > Requests/sec:	1170.0767
    > Total data:	341573483 bytes
    > Size/request:	5221 bytes
+   >``` 
    >```sh
    >Response time histogram:
    >0.009 [1]	|
@@ -290,6 +291,7 @@ g. You will see a result similar to the below. Notice the Requests/sec value.
    >0.193 [36]	|
    >0.216 [26]	|
    >0.239 [5]	|
+   >```
    >```sh
    >Latency distribution:
    >10% in 0.0226 secs
@@ -299,6 +301,7 @@ g. You will see a result similar to the below. Notice the Requests/sec value.
    >90% in 0.0458 secs
    >95% in 0.0531 secs
    >99% in 0.0897 secs
+   >```
    >```sh
    >Details (average, fastest, slowest):
    >DNS+dialup:	0.0053 secs, 0.0088 secs, 0.2389 secs
@@ -309,7 +312,7 @@ g. You will see a result similar to the below. Notice the Requests/sec value.
    >```sh
    >Status code distribution:
    >[200]	65423 responses
-   >```   
+   >```
    
 ## 1.1. Setting up GraalVM and Installing Scala
 
