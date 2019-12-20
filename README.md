@@ -21,21 +21,23 @@ This workshop assumes you have access to a Linux environment or MacOS
 
 ## 0.5. Getting started with GraalVM on premise
 
-a. Navigate to Oracle Technology Network Downloads page and accept the license agreement.
-   ![user input](images/userinput.png) https://www.oracle.com/technetwork/graalvm/downloads/index.html
-
-b. Ensure you are connected to the internet.
+a. Navigate to Oracle Technology Network Downloads page and accept the license agreement:
+   ![user input](images/userinput.png) 
+   https://www.oracle.com/technetwork/graalvm/downloads/index.html
+   
+b. Ensure you are connected to the internet:
    ![user input](images/userinput.png)
    >```sh
    >ping graalvm.org
    >```
-b. Open a terminal and modify the permissions of the downloaded key:
+   
+c. Open a terminal and modify the permissions of the downloaded key:
    ![user input](images/userinput.png)
    >```sh
    >chmod 400 ~/Desktop/key.txt
    >```
-c. Connect to your assigned VM via its IP address:
-
+   
+d. Connect to your assigned VM via its IP address:
    ![user input](images/userinput.png)
    >```sh
    >ssh -i ~/Desktop/key.txt -L 3000:localhost:3000 opc@<IP address>
