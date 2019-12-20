@@ -20,12 +20,14 @@ abilities and how you can benefit from using GraalVM for your Scala workloads.
 This workshop assumes you have access to a Linux environment or MacOS
 
 a. Ensure you are connected to the internet.
-c. Open a terminal and modify the permissions of the downloaded key:
+   ```
+   ```
+b. Open a terminal and modify the permissions of the downloaded key:
    ![user input](images/userinput.png)
    >```sh
    >chmod 400 ~/Desktop/key.txt
    >```
-d. Connect to your assigned VM via its IP address:
+c. Connect to your assigned VM via its IP address:
 
    ![user input](images/userinput.png)
    >```sh
