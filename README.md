@@ -5,7 +5,7 @@ Table of Contents:
 * [Exercise 2: Low footprint & fast startup: Building native platform binaries from Scala applications with GraalVM](#exercise-2-build-native-platform-from-scala-apps)
 * [Appendix](#appendix)
 
-# Exercise 0: Connect to your Virtual Machine
+# Exercise 0: Getting started with GraalVM: download and installation
 
 > As you make your way through this lab, look out for this icon.
 ![user input](images/userinput.png) Whenever you see it, it's time for you to
@@ -65,7 +65,7 @@ d. Connect to your assigned VM via its IP address:
    You will use this later to access one of the examples using the your browser
    on your laptop.
 
-# Exercise 1: GraalVM
+# Exercise 1: Peak performance: Running Scala applications on GraalVM
 
 There are a lot of different parts to [GraalVM](https://www.graalvm.org/), so
 while you may have heard of it, there are almost certainly things that it can do
@@ -568,7 +568,7 @@ kind of commoditisation of languages and modules - you can use whichever
 language you think is best for your problem at hand, and whichever library you
 want, no matter which language it came from.
 
-# Exercise 2: Microservices: Creating your first Micronaut GraalVM application
+# Exercise 2: Exercise 2: Low footprint & fast startup: Building native platform binaries from Scala applications with GraalVM
 
 ![micronaut](images/micronaut.png)
 
@@ -647,59 +647,11 @@ Finally, kill the docker container:
 ![user input](images/micronaut-memory.png)
 
 
-# Exercise 3: SpringBoot
-
-This lab will focus on SpringBoot
-
-## 0. First clone the sample SpringBoot Application
->```sh
->git clone https://github.com/spring-projects-experimental/spring-graal-native.git
->```
-
-## 1. Compile and Run the application using GraalVM Native Image
->```sh
->cd spring-graal-native
->./mvnw clean package
->cd spring-graal-native-samples/spring-petclinic-jpa/
->./compile.sh (takes a long time and require a lot of memory, it is not yet optimized)
->./petclinic (first run can be slow like 1s, next ones are less than 0.2s, again it is not optimized yet)
->```
-
-## 2. Launch Application in the browser
-Go to http://localhost:8080/
-
-Click on find owners menu
-
-Click on find owners button to see the list of owners
-
-Click on veterinarians menu
 
 ### Conclusions
 
-You have seen GraalVM in action, Microservices with GraalVM and also how a SpringBoot application works with GraalVM
+You have seen GraalVM in action with Scala, Please provide us feedback!
+
+## Appendix
 
 
-## Appendix: VNC
-
-If you'd like to connect to your VM graphically, follow these steps.
-
-While connected to your VM via SSH, start the VNC server as follows:
-
-![user input](images/userinput.png)
->```sh
->vncserver
->```
-
-Set a password when prompted.
-
-To connect graphically to the VNC server, you'll need a VNC client on your
-laptop.  You can use whatever you have previously installed or you can use the
-VNC Viewer for Chrome that is extremely easy to install.
-
-https://chrome.google.com/webstore/detail/vnc%C2%AE-viewer-for-google-ch/iabmpiboiopbgfabjmgeedhcmjenhbla/related
-
-![user input](images/userinput.png) Log into your VM using the provided IP
-Address.  The VNC port is **5901** so the server address you'll need
-to provide will look like **`n.n.n.n:5901`**
-
-When prompted, enter the VNC password you set earlier.
