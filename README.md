@@ -21,9 +21,9 @@ This workshop assumes you have access to a Linux environment or MacOS
 
 a. Ensure you are connected to the internet.
    ![user input](images/userinput.png)
-   ```sh
+   >```sh
    >ping graalvm.org
-   ```
+   >```
 b. Open a terminal and modify the permissions of the downloaded key:
    ![user input](images/userinput.png)
    >```sh
