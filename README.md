@@ -270,14 +270,13 @@ g. You will see a result similar to the below. Notice the Requests/sec value.
 
    >```sh
    >Summary:
-    >Total:	60.0773 secs
-    >Slowest:	0.2389 secs
-    >Fastest:	0.0088 secs
-    >Average:	0.0359 secs
-    >Requests/sec:	1170.0767
-    >Total data:	341573483 bytes
-    >Size/request:	5221 bytes
-
+   > Total:	60.0773 secs
+   > Slowest:	0.2389 secs
+   > Fastest:	0.0088 secs
+   > Average:	0.0359 secs
+   > Requests/sec:	1170.0767
+   > Total data:	341573483 bytes
+   > Size/request:	5221 bytes
    >Response time histogram:
     >0.009 [1]	|
     >0.032 [21608]	|■■■■■■■■■■■■■■■■■■■■■
