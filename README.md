@@ -581,6 +581,8 @@ e. Make sure that environment variables SCALA_HOME and GRAALVM_HOME point to
 
    ![user input](images/userinput.png)
    >```sh
+   >export SCALA_HOME=<path to Scala>/.sdkman/candidates/scala/2.12.6/
+   >export GRAALVM_HOME=<path to GraalVM>/Contents/Home/
    >cd scalac-substitutions
    >sbt package
    >cd ../
