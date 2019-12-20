@@ -390,7 +390,7 @@ f. Build the project repeatedly, notice times:
    >```sh
    >>clean compile
    >>clean compile
-   >``   
+   >```   
    
 g. Build times are often cited as an important problem in the Scala community and 
    speeding up the compilation cycle by using a better performing runtime. 
