@@ -20,7 +20,9 @@ abilities and how you can benefit from using GraalVM for your Scala workloads.
 This workshop assumes you have access to a Linux environment or MacOS
 
 a. Ensure you are connected to the internet.
-   ```
+   ![user input](images/userinput.png)
+   ```sh
+   >ping graalvm.org
    ```
 b. Open a terminal and modify the permissions of the downloaded key:
    ![user input](images/userinput.png)
