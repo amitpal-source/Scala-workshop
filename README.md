@@ -464,29 +464,29 @@ g. You will see a result similar to the below.
 
    >```sh
    >Hello World!
-	>Command being timed: "java -jar target/scala-2.12/sbt-example-assembly-0.1.0-SNAPSHOT.jar"
-	>User time (seconds): 0.54 
-	>System time (seconds): 0.05
-	>Percent of CPU this job got: 138%
-	>Elapsed (wall clock) time (h:mm:ss or m:ss): 0:00.42
-	>Average shared text size (kbytes): 0
-	>Average unshared data size (kbytes): 0
-	>Average stack size (kbytes): 0
-	>Average total size (kbytes): 0
-	>Maximum resident set size (kbytes): 64640 <- 64M
-	>Average resident set size (kbytes): 0
-	>Major (requiring I/O) page faults: 0
-	>Minor (reclaiming a frame) page faults: 8065
-	>Voluntary context switches: 1062
-	>Involuntary context switches: 10
-	>Swaps: 0
-	>File system inputs: 0
-	>File system outputs: 64
-	>Socket messages sent: 0
-	>Socket messages received: 0
-	>Signals delivered: 0
-	>Page size (bytes): 4096
-	>Exit status: 0
+   >Command being timed: "java -jar target/scala-2.12/sbt-example-assembly-0.1.0-SNAPSHOT.jar"
+   >User time (seconds): 0.54 
+   >System time (seconds): 0.05
+   >Percent of CPU this job got: 138%
+   >Elapsed (wall clock) time (h:mm:ss or m:ss): 0:00.42
+   >Average shared text size (kbytes): 0
+   >Average unshared data size (kbytes): 0
+   >Average stack size (kbytes): 0
+   >Average total size (kbytes): 0
+   >Maximum resident set size (kbytes): 64640 <- 64M
+   >Average resident set size (kbytes): 0
+   >Major (requiring I/O) page faults: 0
+   >Minor (reclaiming a frame) page faults: 8065
+   >Voluntary context switches: 1062
+   >Involuntary context switches: 10
+   >Swaps: 0
+   >File system inputs: 0
+   >File system outputs: 64
+   >Socket messages sent: 0
+   >Socket messages received: 0
+   >Signals delivered: 0
+   >Page size (bytes): 4096
+   >Exit status: 0
    >``` 
 
 h. Compare with the time it takes to start the native image:
@@ -499,29 +499,29 @@ h. Compare with the time it takes to start the native image:
 i. You will see a result similar to the below. 
 
    >Hello World!
-	>Command being timed: "./example.hello"
-	>User time (seconds): 0.00
-	>System time (seconds): 0.00
-	>Percent of CPU this job got: 100%
-	>Elapsed (wall clock) time (h:mm:ss or m:ss): 0:00.00
-	>Average shared text size (kbytes): 0
-	>Average unshared data size (kbytes): 0
-	>Average stack size (kbytes): 0
-	>Average total size (kbytes): 0
-	>Maximum resident set size (kbytes): 4932 <- 4M
-	>Average resident set size (kbytes): 0
-	>Major (requiring I/O) page faults: 0
-	>Minor (reclaiming a frame) page faults: 169
-	>Voluntary context switches: 1
-	>Involuntary context switches: 1
-	>Swaps: 0
-	>File system inputs: 0
-	>File system outputs: 0
-	>Socket messages sent: 0
-	>Socket messages received: 0
-	>Signals delivered: 0
-	>Page size (bytes): 4096
-	>Exit status: 0
+   >Command being timed: "./example.hello"
+   >User time (seconds): 0.00
+   >System time (seconds): 0.00
+   >Percent of CPU this job got: 100%
+   >Elapsed (wall clock) time (h:mm:ss or m:ss): 0:00.00
+   >Average shared text size (kbytes): 0
+   >Average unshared data size (kbytes): 0
+   >Average stack size (kbytes): 0
+   >Average total size (kbytes): 0
+   >Maximum resident set size (kbytes): 4932 <- 4M
+   >Average resident set size (kbytes): 0
+   >Major (requiring I/O) page faults: 0
+   >Minor (reclaiming a frame) page faults: 169
+   >Voluntary context switches: 1
+   >Involuntary context switches: 1
+   >Swaps: 0
+   >File system inputs: 0
+   >File system outputs: 0
+   >Socket messages sent: 0
+   >Socket messages received: 0
+   >Signals delivered: 0
+   >Page size (bytes): 4096
+   >Exit status: 0
 
 j. Go back to the workshop dir:
 
