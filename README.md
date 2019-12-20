@@ -72,6 +72,82 @@ f. On Windows skip this step. Install native-image component into GraalVM 19.3.
    >```sh
    >gu install -L ../native-image-installable-svm-svmee-java8-linux-amd64-19.3.0.jar
    >```
+   
+## 0.7. Setting up GraalVM and Installing Scala
+
+a. Check the that the `java` command is now available and its version:
+
+   ![user input](images/userinput.png)   
+   >```sh
+   >java -version
+   java version "1.8.0_231"
+   Java(TM) SE Runtime Environment (build 1.8.0_231-b11)
+   Java HotSpot(TM) 64-Bit GraalVM EE 19.3.0 (build 25.231-b11-jvmci-19.3-b05, mixed mode)
+   >```
+   
+b. Select and download Oracle GraalVM Enterprise Edition based on JDK8 for your operating system (19.3.0). 
+   On Windows it is currently recommended for this workshop to use WLS (Linux subsystem) or Docker. 
+   Windows builds are experimental and while JVM and the JIT compiler would most probably work fine,
+   you can find difficulties with the native image commands.
+   
+c. Extract the archive to your file system. To extract the file to the current directory from the console, type
+
+   ![user input](images/userinput.png)
+   >```sh
+   >tar -xvf archive.tar.gz # on Windows – double click to unzip
+   >```
+   
+d. Navigate to Oracle Technology Network Downloads page and accept the license agreement:
+
+   ![user input](images/userinput.png)   
+   https://www.oracle.com/technetwork/graalvm/downloads/index.html
+   
+e. Select and download Oracle GraalVM Enterprise Edition based on JDK8 for your operating system (19.3.0). 
+   On Windows it is currently recommended for this workshop to use WLS (Linux subsystem) or Docker. 
+   Windows builds are experimental and while JVM and the JIT compiler would most probably work fine,
+   you can find difficulties with the native image commands.
+   
+f. Extract the archive to your file system. To extract the file to the current directory from the console, type
+
+   ![user input](images/userinput.png)
+   >```sh
+   >tar -xvf archive.tar.gz # on Windows – double click to unzip
+   >```
+   
+g. Navigate to Oracle Technology Network Downloads page and accept the license agreement:
+
+   ![user input](images/userinput.png)   
+   https://www.oracle.com/technetwork/graalvm/downloads/index.html
+   
+h. Select and download Oracle GraalVM Enterprise Edition based on JDK8 for your operating system (19.3.0). 
+   On Windows it is currently recommended for this workshop to use WLS (Linux subsystem) or Docker. 
+   Windows builds are experimental and while JVM and the JIT compiler would most probably work fine,
+   you can find difficulties with the native image commands.
+   
+i. Extract the archive to your file system. To extract the file to the current directory from the console, type
+
+   ![user input](images/userinput.png)
+   >```sh
+   >tar -xvf archive.tar.gz # on Windows – double click to unzip
+   >```   
+ 
+j. Navigate to Oracle Technology Network Downloads page and accept the license agreement:
+
+   ![user input](images/userinput.png)   
+   https://www.oracle.com/technetwork/graalvm/downloads/index.html
+   
+k. Select and download Oracle GraalVM Enterprise Edition based on JDK8 for your operating system (19.3.0). 
+   On Windows it is currently recommended for this workshop to use WLS (Linux subsystem) or Docker. 
+   Windows builds are experimental and while JVM and the JIT compiler would most probably work fine,
+   you can find difficulties with the native image commands.
+   
+l. Extract the archive to your file system. To extract the file to the current directory from the console, type
+
+   ![user input](images/userinput.png)
+   >```sh
+   >tar -xvf archive.tar.gz # on Windows – double click to unzip
+   >```
+
 
 # Exercise 1: Running Scala Applications on GraalVM
 
