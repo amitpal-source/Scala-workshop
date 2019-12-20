@@ -39,16 +39,39 @@ c. Extract the archive to your file system. To extract the file to the current d
    >tar -xvf archive.tar.gz # on Windows – double click to unzip
    >```
    
-d. Connect to your assigned VM via its IP address:
+d. There can be multiple JDKs installed on the machine and the next step is to configure the runtime environment. 
+   Note, Contents/Home is a macOS construct, on Windows/Linux the commands would be using: <path to GraalVM>/bin
+
+   Add the GraalVM bin folder to the PATH environment variable:
+   
+   ![user input](images/userinput.png)
+   >```sh
+   >export PATH=<path to GraalVM>/Contents/Home/bin:$PATH.
+   >```
+
+   Verify whether you are using GraalVM with the echo command:
 
    ![user input](images/userinput.png)
    >```sh
-   >ssh -i ~/Desktop/key.txt -L 3000:localhost:3000 opc@<IP address>
+   >echo $PATH.
    >```
 
-   Note that we're also setting up SSH port-forwarding on port 3000 to your VM.
-   You will use this later to access one of the examples using the your browser
-   on your laptop.
+   Set the JAVA_HOME environment variable to resolve to the GraalVM installation directory:
+
+   ![user input](images/userinput.png)
+   >```sh
+   >export JAVA_HOME=<path to GraalVM>/Contents/Home
+   >```
+
+e. On Windows skip this step. Download the native image component for your operating system from OTN, 
+   for example for Linux use native-image-installable-svm-svmee-java8-linux-amd64-19.3.0.jar
+   
+f. On Windows skip this step. Install native-image component into GraalVM 19.3.
+   	
+   ![user input](images/userinput.png)
+   >```sh
+   >gu install -L ../native-image-installable-svm-svmee-java8-linux-amd64-19.3.0.jar
+   >```
 
 # Exercise 1: Running Scala Applications on GraalVM
 
