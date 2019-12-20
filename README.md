@@ -8,6 +8,7 @@ Table of Contents:
 # Exercise 0: Getting started with GraalVM
 
 > As you make your way through this lab, look out for this icon.
+
 ![user input](images/userinput.png) Whenever you see it, it's time for you to
 perform an action.
 
@@ -22,22 +23,20 @@ This workshop assumes you have access to a Linux environment or MacOS
 ## 0.5. Getting started with GraalVM on premise
 
 a. Navigate to Oracle Technology Network Downloads page and accept the license agreement:
-   ![user input](images/userinput.png)
-   
+
+   ![user input](images/userinput.png)   
    https://www.oracle.com/technetwork/graalvm/downloads/index.html
    
-b. Ensure you are connected to the internet:
-
-   ![user input](images/userinput.png)
-   >```sh
-   >ping graalvm.org
-   >```
+b. Select and download Oracle GraalVM Enterprise Edition based on JDK8 for your operating system (19.3.0). 
+   On Windows it is currently recommended for this workshop to use WLS (Linux subsystem) or Docker. 
+   Windows builds are experimental and while JVM and the JIT compiler would most probably work fine,
+   you can find difficulties with the native image commands.
    
-c. Open a terminal and modify the permissions of the downloaded key:
+c. Extract the archive to your file system. To extract the file to the current directory from the console, type
 
    ![user input](images/userinput.png)
    >```sh
-   >chmod 400 ~/Desktop/key.txt
+   >tar -xvf archive.tar.gz # on Windows – double click to unzip
    >```
    
 d. Connect to your assigned VM via its IP address:
