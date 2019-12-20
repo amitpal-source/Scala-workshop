@@ -309,11 +309,40 @@ g. You will see a result similar to the below. Notice the Requests/sec value.
    >req write:	0.0002 secs, 0.0000 secs, 0.0588 secs
    >resp wait:	0.0299 secs, 0.0010 secs, 0.2257 secs
    >resp read:	0.0004 secs, 0.0000 secs, 0.0628 secs
+   >```
    >```sh
    >Status code distribution:
    >[200]	65423 responses
    >```
+
+h. Stop the sbt run in the original terminal:
+
+   ![user input](images/userinput.png)
+   >```sh
+   >Ctrl + d
+   >```
    
+i. Compare to the performance of another JDK. 
+   
+   ![user input](images/userinput.png)
+   >```sh
+   >Open the terminal where you had OpenJDK installed and configured (see excercise 0.7 h))  
+   >```
+    
+j. Run the app with OpenJDK:
+
+   ![user input](images/userinput.png)
+   >```sh
+   >.sbt run
+   >```   
+
+k. In the terminal where you ran `hey` run the load tests and compare the results to the previous run:
+
+   ![user input](images/userinput.png)
+   >```sh
+   >./hey -z 300s -disable-keepalive http://127.0.0.1:9000/
+   >```   
+
 ## 1.1. Setting up GraalVM and Installing Scala
 
 ### Conclusions
