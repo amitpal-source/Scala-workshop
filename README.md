@@ -80,6 +80,11 @@ a. Check the that the `java` command is now available and its version:
    ![user input](images/userinput.png)   
    >```sh
    >java -version
+   >```
+   
+   Should Output:
+   
+   >```sh
    java version "1.8.0_231"
    Java(TM) SE Runtime Environment (build 1.8.0_231-b11)
    Java HotSpot(TM) 64-Bit GraalVM EE 19.3.0 (build 25.231-b11-jvmci-19.3-b05, mixed mode)
