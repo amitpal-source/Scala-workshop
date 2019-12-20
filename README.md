@@ -498,6 +498,7 @@ h. Compare with the time it takes to start the native image:
    
 i. You will see a result similar to the below. 
 
+   >```sh
    >Hello World!
    >Command being timed: "./example.hello"
    >User time (seconds): 0.00
@@ -522,6 +523,7 @@ i. You will see a result similar to the below.
    >Signals delivered: 0
    >Page size (bytes): 4096
    >Exit status: 0
+   >```
 
 j. Go back to the workshop dir:
 
@@ -541,7 +543,80 @@ k. GraalVM native images have certain runtime properties – they start fast and
    example we’ll build the native image of the `scalac` so it doesn’t spend time starting a jvm every 
    time we call it.
    
-## 2.1. Native image of Scalac  
+## 2.1. Native image of Scalac 
+
+For this particular exercise you need to install Scala 2.12.6. Scala 2.13 would work in a similar fashion, 
+but currently this issue is blocking it: https://github.com/oracle/graal/issues/877
+
+a. So please install Scala 2.12.6 (the version that is known to work).
+
+   ![user input](images/userinput.png)
+   >```sh
+   >sdk install scala 2.12.6
+   >```
+
+b. It will install scala 2.12.6. If you want to switch between Scala versions, use:
+
+   ![user input](images/userinput.png)
+   >```sh
+   >sdk use scala 2.12.6 # or sdk use scala 2.13.1
+   >```
+   
+c. Clone the repository with the GraalVM demos:
+
+   ![user input](images/userinput.png)
+   >```sh
+   >git clone https://github.com/graalvm/graalvm-demos.git
+   >```   
+   
+d. Navigate to the scalac-native demo:
+
+   ![user input](images/userinput.png)
+   >```sh
+   >cd graalvm-demos/scala-days-2018/scalac-native/
+   >```
+   
+e. Make sure that environment variables SCALA_HOME and GRAALVM_HOME point to Scala 2.12.6 and GraalVM. 
+   Then build the sbt project scalac-substitutions:
+
+   ![user input](images/userinput.png)
+   >```sh
+   >cd scalac-substitutions
+   >sbt package
+   >cd ../
+   >```  
+   
+f. To build the native image of the Scala compiler run:
+
+   ![user input](images/userinput.png)
+   >```sh
+   >./scalac-image.sh
+   >``` 
+   
+g. The above command builds the native image like in the previous section, but of scalac which is a Scala 
+   program itself. This allows to compile Scala apps without needing to start and warmup the JVM which for 
+   short invocations of scalac can by much faster than otherwise.
+
+h. Let's see how we compare to the JVM on the first run (scalac-native is a shell script that sets environment 
+   variables and calls native image of scalac):
+
+   ![user input](images/userinput.png)
+   >```sh
+   >$ time $SCALA_HOME/bin/scalac HelloWorld.scala
+   >real	0m2.315s
+   >user	0m5.868s
+   >sys	0m0.248s
+   >```
+   >```sh
+   >& time ./scalac-native HelloWorld.scala
+   >real	0m0.177s
+   >user	0m0.129s
+   >sys	0m0.034s
+   >```
+
+i. The time difference is clearly visible and you can expect similar effects. 
+   One project that uses GraalVM native images is Scalafmt, you can read more about it here:
+   https://scalameta.org/scalafmt/docs/installation.html#native-image
 
 ### Conclusions
 
