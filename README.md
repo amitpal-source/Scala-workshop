@@ -19,7 +19,12 @@ abilities and how you can benefit from using GraalVM for your Scala workloads.
 
 This workshop assumes you have access to a Linux environment or MacOS
 
-a. Ensure you are connected to the internet.
+## 0.5. Getting started with GraalVM on premise
+
+a. Navigate to Oracle Technology Network Downloads page and accept the license agreement.
+   ![user input](images/userinput.png) https://www.oracle.com/technetwork/graalvm/downloads/index.html
+
+b. Ensure you are connected to the internet.
    ![user input](images/userinput.png)
    >```sh
    >ping graalvm.org
