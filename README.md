@@ -627,13 +627,10 @@ An example project that demonstrates how to execute R files from Scala using Gra
 >```sh
 >import org.graalvm.polyglot.{Context, Source}
 >object Main extends App {
-
 >// We need to initialise a GraalContext that will do the mediation between the JVM languages and R
 >val context: Context = Context.newBuilder("R").allowAllAccess(true).build()
-
 >// Next, we need to create a Source, which needs to know what language it features and where to find the code.
 >val source: Source = Source.newBuilder("R", Main.getClass.getResource("funHelloWorld.R")).build()
-
 >/*
 >* Then, we need to tell our compiler what kind of function this new Source represents.
 >* In this case it is a function that doesn't take an argument and returns a String.
