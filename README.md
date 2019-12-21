@@ -649,21 +649,36 @@ An example project that demonstrates how to execute R files from Scala using Gra
 
 https://medium.com/codestar-blog/in-search-of-the-holy-graalvm-putting-the-r-in-scala-or-java-or-b057494f77
 
-a. Clone the following project into current directory:
+a. Install R
+
+   ![user input](images/userinput.png)
+   >```sh
+   >cd /Users/adhillon/Desktop/InJapan/GraalVM-latest/graalvm-ee-java8-19.3.0/Contents/Home/bin
+   >gu install R
+   >cd /usr/local
+   >sudo mkdir include
+   >sudo chown -R $(whoami) $(brew --prefix)/include
+   >brew link gcc@4.9
+   >/Users/adhillon/Desktop/InJapan/GraalVM-latest/graalvm-ee-java8-19.3.0/Contents/Home/jre/languages/R/bin/configure_fastr
+   >R
+   >R version 3.6.1 (FastR)
+   >```
+
+b. Clone the following project into current directory:
 
    ![user input](images/userinput.png)
    >```sh
    >git clone https://github.com/NRBPerdijk/example-graalvm-r-scala.git
    >```
    
-b. Run sbt
+c. Run sbt
 
    ![user input](images/userinput.png)
    >```sh
    >sbt run
    >``` 
    
-c. See Output 
+d. See Output 
    >```sh
    >example-graalvm-r-scala-master adhillon$ sbt run
    >[info] Updating ...
