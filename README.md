@@ -260,6 +260,13 @@ e. Install hey, one of the load testing tools:
    >chmod a+x hey
    >```  
    
+   If you use Mac, please use this link or homebrew to install.
+   
+   >```sh
+   >wget -O hey https://storage.googleapis.com/hey-release/hey_darwin_amd64
+   >chmod a+x hey
+   >```  
+   
 f. Run hey on the application. Notice the results, average req/s for example.
 
    ![user input](images/userinput.png)
