@@ -611,7 +611,7 @@ h. Let's see how we compare to the JVM on the first run (scalac-native is a shel
    >sys	0m0.248s
    >```
    >```sh
-   >& time ./scalac-native HelloWorld.scala
+   >time ./scalac-native HelloWorld.scala
    >real	0m0.177s
    >user	0m0.129s
    >sys	0m0.034s
