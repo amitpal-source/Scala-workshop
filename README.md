@@ -624,8 +624,8 @@ i. The time difference is clearly visible and you can expect similar effects.
 # Exercise 3: Running Scala and R in a Polyglot on GraalVM
 
 An example project that demonstrates how to execute R files from Scala using GraalVM
+>```sh
 import org.graalvm.polyglot.{Context, Source}
-
 object Main extends App {
 
   // We need to initialise a GraalContext that will do the mediation between the JVM languages and R
@@ -649,6 +649,7 @@ object Main extends App {
    */
   println(s"Also printing the return String: ${rHelloWorld()}")
 }
+>``` 
 
 https://medium.com/codestar-blog/in-search-of-the-holy-graalvm-putting-the-r-in-scala-or-java-or-b057494f77
 
