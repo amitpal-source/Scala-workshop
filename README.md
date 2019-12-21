@@ -3,6 +3,7 @@ Table of Contents:
 * [Exercise 0: Getting Started with GraalVM](#exercise-0-getting-started-with-graalvm)
 * [Exercise 1: Running Scala applications on GraalVM](#exercise-1-running-scala-applications-on-graalvm)
 * [Exercise 2: Building Native Platform binaries from Scala Applications with GraalVM](#exercise-2-building-native-platform-binaries-from-scala-applications-with-graalvm)
+* [Exercise 3: Running Scala and R in a Polyglot on GraalVM](#exercise-3-running-scala-and-r-in-a-polyglot-on-graalvm)
 * [Appendix](#appendix)
 
 # Exercise 0: Getting started with GraalVM
@@ -619,6 +620,40 @@ h. Let's see how we compare to the JVM on the first run (scalac-native is a shel
 i. The time difference is clearly visible and you can expect similar effects. 
    One project that uses GraalVM native images is Scalafmt, you can read more about it here:
    https://scalameta.org/scalafmt/docs/installation.html#native-image
+
+# Exercise 3: Running Scala and R in a Polyglot on GraalVM
+
+An example project that demonstrates how to execute R files from Scala using GraalVM
+https://medium.com/codestar-blog/in-search-of-the-holy-graalvm-putting-the-r-in-scala-or-java-or-b057494f77
+
+a. Clone the following project into current directory:
+
+   ![user input](images/userinput.png)
+   >```sh
+   >git clone https://github.com/NRBPerdijk/example-graalvm-r-scala.git
+   >```
+   
+b. Run sbt
+
+   ![user input](images/userinput.png)
+   >```sh
+   >sbt run
+   >``` 
+   
+c. See Output 
+   >```sh
+   >example-graalvm-r-scala-master adhillon$ sbt run
+   >[info] Updating ...
+   >[info] Done updating.
+   >[info] Compiling 1 Scala source to /Users/adhillon/Desktop/InJapan/GraalVM-latest/example-graalvm-r-scala 
+   >[info] Done compiling.
+   >[info] Packaging /Users/adhillon/Desktop/InJapan/GraalVM-latest/example-graalvm-r-scala-master/target/scala-2.12/example- graalvm-r-scala-master_2.12-0.1.0-SNAPSHOT.jar ...
+   >[info] Done packaging.
+   >[info] Running Main 
+   >[1] "Hello, World!"
+   >Also printing the return String: Hello, World! executed in R
+   >[success] Total time: 20 s, completed 21 Dec, 2019 12:26:15 PM
+   >```
 
 ### Conclusions
 
