@@ -690,7 +690,7 @@ d. See Output
    >[info] Running Main 
    >[1] "Hello, World!"
    >Also printing the return String: Hello, World! executed in R
-   >[success] Total time: 20 s, completed 21 Dec, 2019 12:26:15 PM
+   >[success]
    >```
 
 ### Conclusions
